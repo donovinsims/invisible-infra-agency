@@ -1,16 +1,9 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 export default function Home() {
-  const [scrolled, setScrolled] = useState(false);
   const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -19,199 +12,228 @@ export default function Home() {
   };
 
   return (
-    <div className="main-wrapper">
-      {/* Background Pattern */}
-      <div className="fixed-bg" style={{
-        position: 'fixed',
-        inset: 0,
-        zIndex: -1,
-        opacity: 0.03,
-        backgroundImage: `radial-gradient(var(--text-main) 1px, transparent 1px)`,
-        backgroundSize: '40px 40px'
-      }} />
-
+    <div className="min-h-screen">
       {/* Navigation */}
-      <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-glass border-b border-subtle py-4 backdrop-blur-md' : 'py-8'}`} style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        padding: scrolled ? '1rem 0' : '2rem 0',
-        backgroundColor: scrolled ? 'var(--bg-glass)' : 'transparent',
-        borderBottom: scrolled ? '1px solid var(--border-subtle)' : 'none',
-        backdropFilter: scrolled ? 'blur(10px)' : 'none'
-      }}>
+      <nav className="py-6 border-b border-subtle bg-base sticky top-0 z-50 bg-opacity-90 backdrop-blur-sm" style={{ backgroundColor: 'var(--bg-base)' }}>
         <div className="container flex justify-between items-center">
-          <div className="logo" style={{ fontWeight: 800, fontSize: '1.5rem', letterSpacing: '-0.05em' }}>
-            INVISIBLE <span style={{ color: 'var(--brand-accent)' }}>INFRA</span>
+          <div className="flex items-center gap-2">
+            <div className="w-6 h-6 bg-brand-primary" style={{ backgroundColor: 'var(--brand-primary)' }}></div>
+            <span style={{ fontWeight: 800, fontSize: '1.25rem', letterSpacing: '-0.04em' }}>INVISIBLE INFRA</span>
           </div>
-          <div className="nav-links flex gap-8 items-center">
-            <a href="#how-it-works" style={{ textDecoration: 'none', color: 'var(--text-muted)', fontSize: '0.875rem', fontWeight: 600 }}>HOW IT WORKS</a>
-            <a href="#pricing" style={{ textDecoration: 'none', color: 'var(--text-muted)', fontSize: '0.875rem', fontWeight: 600 }}>PRICING</a>
-            <button className="btn btn-secondary" style={{ padding: '0.5rem 1.25rem', fontSize: '0.875rem' }} onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>
-              GET AUDIT
+          <div className="flex items-center gap-12">
+            <div className="nav-links flex gap-8">
+              <a href="#how-it-works" className="btn-quiet" style={{ textDecoration: 'none', fontWeight: 600, fontSize: '0.875rem' }}>HOW IT WORKS</a>
+              <a href="#pricing" className="btn-quiet" style={{ textDecoration: 'none', fontWeight: 600, fontSize: '0.875rem' }}>PRICING</a>
+            </div>
+            <button className="btn btn-primary" onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>
+              GET FREE AUDIT
             </button>
           </div>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <header className="section-padding container flex flex-col items-center text-center mt-16">
-        <div className="reveal stagger-1" style={{ display: 'inline-block', padding: '0.5rem 1rem', background: 'var(--brand-accent-glow)', border: '1px solid var(--border-vibrant)', borderRadius: '2rem', fontSize: '0.75rem', fontWeight: 700, color: 'var(--brand-accent)', marginBottom: '2rem', letterSpacing: '0.1em' }}>
-          LOCAL SERVICE INFRASTRUCTURE
-        </div>
-        <h1 className="reveal stagger-2" style={{ marginBottom: '2rem' }}>
-          Stop selling AI.<br />
-          Start installing <span style={{ color: 'var(--brand-accent)' }}>Infrastructure.</span>
-        </h1>
-        <p className="reveal stagger-3 mx-auto mb-12" style={{ maxWidth: '700px' }}>
-          We don't do "consulting." We install the automated systems that make contractors and service companies run 10 years ahead of their competition. 
-        </p>
-        <div className="reveal stagger-3 flex gap-4 flex-mobile-col">
-          <button className="btn btn-primary" onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>
-            REQUEST FREE INFRA AUDIT
-          </button>
-          <button className="btn btn-secondary">
-            SEE OUR PLAYBOOK
-          </button>
+      <header className="section">
+        <div className="container">
+          <div style={{ maxWidth: '900px' }}>
+            <p className="brand-text mb-4" style={{ fontWeight: 700, letterSpacing: '0.1em', fontSize: '0.875rem' }}>OPERATIONAL INFRASTRUCTURE FOR TRADES</p>
+            <h1>Stop selling AI. Start installing <span className="brand-text">Systems that scale.</span></h1>
+            <p className="text-secondary mb-12" style={{ fontSize: '1.25rem', lineHeight: '1.6' }}>
+              We don't do "consulting." We install the automated infrastructure that handles missed calls, lead response, and job scheduling while your team stays in the field. 
+            </p>
+            <div className="flex gap-4 flex-mobile-col">
+              <button className="btn btn-primary" style={{ padding: '1rem 2.5rem' }} onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>
+                REQUEST INFRASTRUCTURE AUDIT
+              </button>
+              <button className="btn btn-secondary" style={{ padding: '1rem 2.5rem' }}>
+                VIEW IMPLEMENTATION GUIDE
+              </button>
+            </div>
+          </div>
         </div>
       </header>
 
-      {/* Trust Section */}
-      <section className="container text-center mb-32 reveal stagger-3" style={{ opacity: 0.6 }}>
-        <p style={{ fontSize: '0.75rem', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '2rem' }}>Trusted by local trades in</p>
-        <div className="flex flex-wrap justify-center gap-12 items-center" style={{ fontWeight: 700, fontSize: '1.25rem' }}>
-          <span>ROSCOE</span>
-          <span style={{ color: 'var(--brand-accent)' }}>•</span>
-          <span>ROCKFORD</span>
-          <span style={{ color: 'var(--brand-accent)' }}>•</span>
-          <span>WINNEBAGO</span>
-          <span style={{ color: 'var(--brand-accent)' }}>•</span>
-          <span>CHERRY VALLEY</span>
+      {/* Trust & Proof Strip */}
+      <section className="py-12 border-y border-subtle bg-surface" style={{ backgroundColor: 'var(--bg-surface)' }}>
+        <div className="container">
+          <div className="flex justify-between items-center flex-wrap gap-8">
+            <div className="flex flex-col">
+              <span className="text-muted" style={{ fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.1em' }}>SERVICE AREA</span>
+              <span style={{ fontWeight: 700 }}>WINNEBAGO COUNTY, IL</span>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-muted" style={{ fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.1em' }}>IMPLEMENTATION</span>
+              <span style={{ fontWeight: 700 }}>7–21 DAYS</span>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-muted" style={{ fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.1em' }}>AVERAGE RESULTS</span>
+              <span style={{ fontWeight: 700 }}>30% ADMIN REDUCTION</span>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-muted" style={{ fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.1em' }}>COMPATIBLE CRMS</span>
+              <span style={{ fontWeight: 700 }}>JOBNIMBUS / ACCULYNX / HUBSPOT</span>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Features Grid */}
-      <section id="how-it-works" className="section-padding bg-surface" style={{ backgroundColor: 'var(--bg-surface)' }}>
+      {/* Features - Schematic Layout */}
+      <section id="how-it-works" className="section">
         <div className="container">
           <div className="mb-20">
             <h2 className="mb-4">Confidently Boring Growth.</h2>
-            <p>We replace manual steps with invisible infrastructure. No hype, just better plumbing.</p>
-          </div>
-          <div className="grid-2">
-            <div className="feature-card reveal stagger-1">
-              <div style={{ fontSize: '2rem', marginBottom: '1.5rem' }}>⚡️</div>
-              <h3 className="mb-4">60-Second Hook</h3>
-              <p>Every lead from your site gets a text response in under a minute. English or Spanish. We beat the competition while you're still on the roof.</p>
-            </div>
-            <div className="feature-card reveal stagger-2">
-              <div style={{ fontSize: '2rem', marginBottom: '1.5rem' }}>📦</div>
-              <h3 className="mb-4">The Pizza Tracker</h3>
-              <p>Automated SMS updates for every milestone. "Materials delivered," "Crew arriving tomorrow," "Job complete." Zero office calls required.</p>
-            </div>
-            <div className="feature-card reveal stagger-3">
-              <div style={{ fontSize: '2rem', marginBottom: '1.5rem' }}>📄</div>
-              <h3 className="mb-4">Insurance Advocate</h3>
-              <p>AI documentation that analyzes storm damage photos and drafts supplement requests instantly. Recover 15-20% more on every claim.</p>
-            </div>
-            <div className="feature-card reveal stagger-1">
-              <div style={{ fontSize: '2rem', marginBottom: '1.5rem' }}>⭐</div>
-              <h3 className="mb-4">Review Engine</h3>
-              <p>The second a job is marked "Complete" in your CRM, the review sequence triggers. 5-star reputations built on autopilot.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Pricing / Process */}
-      <section id="pricing" className="section-padding container">
-        <div className="glass-panel text-center">
-          <h2 className="mb-8">How We Work</h2>
-          <div className="grid-2" style={{ textAlign: 'left' }}>
-            <div>
-              <h4 className="mb-2" style={{ color: 'var(--brand-accent)' }}>7-21 DAY INSTALL</h4>
-              <p>We spend time understanding your leaks, then we install the systems. One-time setup fee.</p>
-            </div>
-            <div>
-              <h4 className="mb-2" style={{ color: 'var(--brand-accent)' }}>$20-$50 MONITORING</h4>
-              <p>A small monthly fee to keep the plumbing healthy. No vendor lock-in. No bloated tech stack.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Section */}
-      <section id="contact" className="section-padding container">
-        <div className="grid-2 gap-16">
-          <div className="reveal">
-            <h2 className="mb-6">Is your infrastructure leaking money?</h2>
-            <p className="mb-8">We'll crawl your site, review your current response times, and show you exactly where leads are falling through the cracks. For free.</p>
-            <div style={{ padding: '2rem', background: 'var(--bg-surface)', borderLeft: '4px solid var(--brand-accent)', borderRadius: '0 var(--radius-sm) var(--radius-sm) 0' }}>
-              <p style={{ fontStyle: 'italic', color: 'var(--text-main)', marginBottom: '1rem' }}>"Most contractors lose 30% of their leads because they take 4 hours to call back. We fix that in a week."</p>
-              <p style={{ fontSize: '0.875rem', fontWeight: 700 }}>— INVISIBLE INFRA TEAM</p>
-            </div>
+            <p className="text-secondary">We install the "Invisible Infrastructure" that removes manual steps between a lead coming in and a job getting scheduled.</p>
           </div>
 
-          <div className="reveal">
-            {formStatus === 'success' ? (
-              <div className="glass-panel text-center py-20">
-                <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>✅</div>
-                <h3 className="mb-4">Infrastructure Logged</h3>
-                <p>We're already crawling your site. Expect an audit in your inbox soon.</p>
+          <div className="grid grid-cols-2">
+            <div className="infra-card">
+              <h3 className="mb-4">60-Second Lead Response</h3>
+              <p>Every lead from your website or phone line gets an immediate SMS response. We qualify the lead in English or Spanish and alert your PMs instantly.</p>
+              <div className="mt-4 pt-4 border-t border-subtle" style={{ fontSize: '0.875rem', color: 'var(--brand-primary)', fontWeight: 700 }}>
+                ELIMINATES: LEAD DECAY & MISSED OPPORTUNITIES
               </div>
-            ) : (
-              <form className="glass-panel" onSubmit={handleSubmit}>
-                <div className="form-group">
-                  <label>Business Name</label>
-                  <input type="text" placeholder="e.g. Winnebago Windows" required />
+            </div>
+            <div className="infra-card">
+              <h3 className="mb-4">Automated Status Pipeline</h3>
+              <p>The "Pizza Tracker" for local service. Your customers get proactive updates on material deliveries, crew arrivals, and job completion without a single phone call.</p>
+              <div className="mt-4 pt-4 border-t border-subtle" style={{ fontSize: '0.875rem', color: 'var(--brand-primary)', fontWeight: 700 }}>
+                ELIMINATES: "WHERE IS MY CREW?" PHONE CALLS
+              </div>
+            </div>
+            <div className="infra-card">
+              <h3 className="mb-4">Vision-Based Documentation</h3>
+              <p>We install AI agents that analyze site photos to identify insurance supplements and installation errors in real-time. Recover 15% more value on every claim.</p>
+              <div className="mt-4 pt-4 border-t border-subtle" style={{ fontSize: '0.875rem', color: 'var(--brand-primary)', fontWeight: 700 }}>
+                ELIMINATES: LOST PROFITS FROM POOR DOCUMENTATION
+              </div>
+            </div>
+            <div className="infra-card">
+              <h3 className="mb-4">Review Referral Engine</h3>
+              <p>The moment a job is marked "Complete" in your CRM, our systems trigger review requests and hyper-local neighbor referrals automatically.</p>
+              <div className="mt-4 pt-4 border-t border-subtle" style={{ fontSize: '0.875rem', color: 'var(--brand-primary)', fontWeight: 700 }}>
+                ELIMINATES: MANUAL REPUTATION MANAGEMENT
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing / Implementation Info */}
+      <section id="pricing" className="section bg-surface" style={{ backgroundColor: 'var(--bg-surface)' }}>
+        <div className="container">
+          <div className="grid grid-cols-2 gap-16 items-center">
+            <div>
+              <h2 className="mb-6">The 21-Day Install</h2>
+              <p className="mb-8 text-secondary">We don't sell software licenses. We sell outcomes. We spend time understanding how your business actually runs, then we install the systems that remove the bottlenecks.</p>
+              <ul style={{ listStyle: 'none', display: 'grid', gap: '1rem' }}>
+                <li className="flex gap-3 items-center">
+                  <div className="w-1.5 h-1.5 bg-brand-primary"></div>
+                  <span>One-time setup fee (Strictly scoped)</span>
+                </li>
+                <li className="flex gap-3 items-center">
+                  <div className="w-1.5 h-1.5 bg-brand-primary"></div>
+                  <span>$20–$50/mo monitoring fee</span>
+                </li>
+                <li className="flex gap-3 items-center">
+                  <div className="w-1.5 h-1.5 bg-brand-primary"></div>
+                  <span>No vendor lock-in. You own the systems.</span>
+                </li>
+              </ul>
+            </div>
+            <div className="infra-card bg-base" style={{ backgroundColor: 'var(--bg-base)' }}>
+              <div style={{ paddingBottom: '1.5rem', marginBottom: '1.5rem', borderBottom: '1px solid var(--border-strong)' }}>
+                <h3 className="mb-2">Phase 1: Diagnosis</h3>
+                <p style={{ fontSize: '0.875rem' }}>We crawl your site, review your CRM workflows, and identify your "lead leaks."</p>
+              </div>
+              <div style={{ paddingBottom: '1.5rem', marginBottom: '1.5rem', borderBottom: '1px solid var(--border-strong)' }}>
+                <h3 className="mb-2">Phase 2: Installation</h3>
+                <p style={{ fontSize: '0.875rem' }}>We build the Zaps, Agents, and prompts. We connect your website to your backend.</p>
+              </div>
+              <div>
+                <h3 className="mb-2">Phase 3: Activation</h3>
+                <p style={{ fontSize: '0.875rem' }}>Your team is trained. The system is live. Lead response is now sub-60 seconds.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Redesigned Form Section */}
+      <section id="contact" className="section">
+        <div className="container">
+          <div className="grid grid-cols-2 gap-20">
+            <div>
+              <h2 className="mb-6">Get Your Infrastructure Audit</h2>
+              <p className="text-secondary mb-8">We will perform a technical teardown of your website, lead response time, and CRM handoff gaps. You'll get a concrete action plan within 24 hours.</p>
+              
+              <div className="infra-card" style={{ borderLeft: '4px solid var(--brand-primary)' }}>
+                <p style={{ fontWeight: 600, color: 'var(--text-main)', marginBottom: '1rem' }}>The Audit Includes:</p>
+                <ul style={{ listStyle: 'none', display: 'grid', gap: '0.75rem', fontSize: '0.875rem' }}>
+                  <li>✓ Speed-to-lead benchmark test</li>
+                  <li>✓ Mobile conversion friction report</li>
+                  <li>✓ Automation opportunity roadmap</li>
+                  <li>✓ Estimated ROI calculation</li>
+                </ul>
+              </div>
+            </div>
+
+            <div>
+              {formStatus === 'success' ? (
+                <div className="infra-card text-center py-20" style={{ border: '2px solid var(--brand-primary)' }}>
+                  <h3 className="mb-4">Audit Requested.</h3>
+                  <p>Our team is already beginning the crawl. Check your inbox for your 24-hour teardown report.</p>
                 </div>
-                <div className="form-group">
-                  <label>Owner Email</label>
-                  <input type="email" placeholder="you@business.com" required />
-                </div>
-                <div className="form-group">
-                  <label>Current CRM</label>
-                  <select required>
-                    <option value="">Select CRM...</option>
-                    <option value="jobnimbus">JobNimbus</option>
-                    <option value="acculynx">AccuLynx</option>
-                    <option value="hubspot">HubSpot</option>
-                    <option value="other">Other / None</option>
-                  </select>
-                </div>
-                <button type="submit" className="btn btn-primary" style={{ width: '100%' }} disabled={formStatus === 'submitting'}>
-                  {formStatus === 'submitting' ? 'ANALYZING...' : 'REQUEST FREE AUDIT'}
-                </button>
-              </form>
-            )}
+              ) : (
+                <form className="infra-card" onSubmit={handleSubmit}>
+                  <div className="field-group">
+                    <label htmlFor="biz-name">Business Name</label>
+                    <input type="text" id="biz-name" placeholder="e.g. Winnebago Windows" required />
+                  </div>
+                  <div className="field-group">
+                    <label htmlFor="email">Owner/Manager Email</label>
+                    <input type="email" id="email" placeholder="name@yourbusiness.com" required />
+                  </div>
+                  <div className="field-group">
+                    <label htmlFor="crm">Primary CRM Software</label>
+                    <select id="crm" required>
+                      <option value="">Select current software...</option>
+                      <option value="jobnimbus">JobNimbus</option>
+                      <option value="acculynx">AccuLynx</option>
+                      <option value="hubspot">HubSpot</option>
+                      <option value="other">Other / None</option>
+                    </select>
+                  </div>
+                  <div className="mb-8">
+                    <p className="text-muted" style={{ fontSize: '0.875rem' }}>
+                      <strong>Reassurance:</strong> Your data is used strictly for the audit. No sales spam. We'll send your report within 24 business hours.
+                    </p>
+                  </div>
+                  <button type="submit" className="btn btn-primary" style={{ width: '100%', padding: '1rem' }} disabled={formStatus === 'submitting'}>
+                    {formStatus === 'submitting' ? 'PROCESSING AUDIT...' : 'REQUEST FREE 24-HOUR AUDIT'}
+                  </button>
+                </form>
+              )}
+            </div>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="section-padding border-t border-subtle" style={{ borderTop: '1px solid var(--border-subtle)', background: 'var(--bg-surface)' }}>
-        <div className="container flex justify-between items-center flex-mobile-col gap-8">
-          <div className="logo" style={{ fontWeight: 800, fontSize: '1rem' }}>
-            INVISIBLE INFRA
+      <footer className="py-12 border-t border-subtle">
+        <div className="container flex justify-between items-center flex-wrap gap-8">
+          <div className="flex items-center gap-2">
+            <div className="w-4 h-4 bg-brand-primary"></div>
+            <span style={{ fontWeight: 800, letterSpacing: '-0.04em' }}>INVISIBLE INFRA</span>
           </div>
-          <p style={{ fontSize: '0.875rem' }}>© {new Date().getFullYear()} ROSCOE, ILLINOIS. WINNEBAGO COUNTY FIRST.</p>
-          <div className="flex gap-4">
-            <a href="#" style={{ color: 'var(--text-dim)' }}>TWITTER</a>
-            <a href="#" style={{ color: 'var(--text-dim)' }}>LINKEDIN</a>
+          <p className="text-muted" style={{ fontSize: '0.875rem' }}>
+            © {new Date().getFullYear()} ROSCOE, IL. BUILT FOR THE TRADES.
+          </p>
+          <div className="flex gap-8">
+            <a href="#" className="btn-quiet" style={{ fontSize: '0.75rem', fontWeight: 700, textDecoration: 'none' }}>TWITTER</a>
+            <a href="#" className="btn-quiet" style={{ fontSize: '0.75rem', fontWeight: 700, textDecoration: 'none' }}>LINKEDIN</a>
           </div>
         </div>
       </footer>
-
-      <style jsx>{`
-        .main-wrapper {
-          min-height: 100vh;
-        }
-        @media (max-width: 768px) {
-          .flex-mobile-col {
-            flex-direction: column;
-          }
-        }
-      `}</style>
     </div>
   );
 }
