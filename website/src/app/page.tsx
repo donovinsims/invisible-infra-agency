@@ -18,14 +18,14 @@ export default function Home() {
     <div className="container py-20">
       {/* Hero Section */}
       <section className="animate-fade-up text-center mb-16">
-        <h1 style={{ fontFamily: 'var(--font-outfit)', marginBottom: '1.5rem' }}>
+        <h1 className="hero-title" style={{ fontFamily: 'var(--font-outfit)', marginBottom: '1.5rem' }}>
           Stop selling AI.<br />
           Start installing <span style={{ color: 'var(--brand-primary)' }}>Infrastructure</span>.
         </h1>
         <p className="mx-auto mb-8">
           We build the "Invisible Infrastructure" that makes local service businesses run 10 years ahead of their competitors. No hype. No retainers. Just systems that work.
         </p>
-        <div className="flex justify-center gap-4">
+        <div className="flex justify-center gap-4 flex-mobile-col">
           <button onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>
             View Installation Plans
           </button>
@@ -37,7 +37,7 @@ export default function Home() {
 
       {/* Problem/Solution Grid */}
       <section className="grid grid-cols-2 gap-8 mb-20">
-        <div className="card animate-fade-up delay-100">
+        <div className="card animate-fade-up delay-100 mb-mobile-8">
           <h3 className="mb-4">The Chaos You Know</h3>
           <ul style={{ listStyle: 'none', color: 'var(--text-secondary)' }}>
             <li className="mb-2">✕ Missed calls during jobs.</li>
